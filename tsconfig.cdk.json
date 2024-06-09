@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "composite": true,
+        "target": "ESNext",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "sourceMap": false,
+        "strict": true,
+        "outDir": "cdk.out"
+    },
+    "include": ["cdk"]
+}

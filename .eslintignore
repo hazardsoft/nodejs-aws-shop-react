@@ -1,4 +1,4 @@
+cdk.out
+dist
 node_modules
 public
-vite.config.ts
-serverless.yml
