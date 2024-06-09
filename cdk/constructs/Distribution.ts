@@ -29,6 +29,16 @@ export class DistributionConstruct extends Construct {
         enableLogging: false,
         priceClass: PriceClass.PRICE_CLASS_100,
       },
+      insertHttpSecurityHeaders: false,
+      responseHeadersPolicyProps: {
+        securityHeadersBehavior: {
+          contentSecurityPolicy: {
+            contentSecurityPolicy:
+              "default-src 'none'; img-src 'self'; script-src 'self'; style-src 'unsafe-inline'; object-src 'none'",
+            override: true,
+          },
+        },
+      },
       logS3AccessLogs: false,
     });
     // define policies how to handle resources in case of stack destruction
