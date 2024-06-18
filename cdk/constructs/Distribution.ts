@@ -33,8 +33,7 @@ export class DistributionConstruct extends Construct {
       responseHeadersPolicyProps: {
         securityHeadersBehavior: {
           contentSecurityPolicy: {
-            contentSecurityPolicy:
-              "default-src 'none'; img-src 'self'; script-src 'self'; style-src 'unsafe-inline'; object-src 'none'",
+            contentSecurityPolicy: `style-src 'unsafe-inline'; object-src 'none'`,
             override: true,
           },
         },
