@@ -8,9 +8,11 @@ export const ProductSchema = Yup.object({
   image: Yup.string().url().default(""),
 });
 
-export const AvailableProductSchema = ProductSchema.shape({
+export const StockSchema = Yup.object({
   count: Yup.number().integer().min(0).required().defined().default(0),
 });
+
+export const AvailableProductSchema = ProductSchema.concat(StockSchema);
 
 export type Product = Yup.InferType<typeof ProductSchema>;
 export type AvailableProduct = Yup.InferType<typeof AvailableProductSchema>;
