@@ -1,6 +1,11 @@
-import { Product } from "~/models/Product";
+import * as Yup from "yup";
+import { Product } from "./Product";
 
-export type CartItem = {
-  product: Product;
-  count: number;
-};
+export const CartItemSchema = Yup.object({
+  product_id: Yup.string().uuid().required(),
+  count: Yup.number().integer().min(0).required(),
+});
+
+export type CartItem = Yup.InferType<typeof CartItemSchema>;
+
+export type CartItemWithProduct = CartItem & { product: Product };
