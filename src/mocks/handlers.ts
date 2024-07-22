@@ -1,9 +1,14 @@
 import { rest } from "msw";
 import API_PATHS from "~/constants/apiPaths";
-import { availableProducts, orders, products, cart } from "~/mocks/data";
-import { CartItem } from "~/models/CartItem";
+import {
+  availableProducts,
+  orders,
+  products,
+  cartResponse,
+} from "~/mocks/data";
 import { Order } from "~/models/Order";
 import { AvailableProduct, Product } from "~/models/Product";
+import { CartResponse } from "~/queries/cart";
 
 export const handlers = [
   rest.get(`${API_PATHS.product}/products`, (req, res, ctx) => {
@@ -34,10 +39,18 @@ export const handlers = [
     );
   }),
   rest.get(`${API_PATHS.cart}/profile/cart`, (req, res, ctx) => {
-    return res(ctx.status(200), ctx.delay(), ctx.json<CartItem[]>(cart));
+    return res(
+      ctx.status(200),
+      ctx.delay(),
+      ctx.json<CartResponse>(cartResponse)
+    );
   }),
   rest.put(`${API_PATHS.cart}/profile/cart`, (req, res, ctx) => {
-    return res(ctx.status(200));
+    return res(
+      ctx.status(200),
+      ctx.delay(),
+      ctx.json<CartResponse>(cartResponse)
+    );
   }),
   rest.get(`${API_PATHS.order}/order`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.delay(), ctx.json<Order[]>(orders));

@@ -1,7 +1,8 @@
 import { OrderStatus } from "~/constants/order";
-import { CartItem } from "~/models/CartItem";
+import { CartStatus } from "~/models/Cart";
 import { Order } from "~/models/Order";
 import { AvailableProduct, Product } from "~/models/Product";
+import { CartResponse } from "~/queries/cart";
 
 export const products: Product[] = [
   {
@@ -52,41 +53,43 @@ export const availableProducts: AvailableProduct[] = products.map(
   (product, index) => ({ ...product, count: index + 1 })
 );
 
-export const cart: CartItem[] = [
-  {
-    product: {
-      description: "Short Product Description1",
-      id: "7567ec4b-b10c-48c5-9345-fc73c48a80aa",
-      price: 24,
-      title: "ProductOne",
-      image: "https://example.com/product1.jpg",
+export const cartResponse: CartResponse = {
+  data: {
+    cart: {
+      id: "7567ec4b-b10c-48c5-9345-fc73c48a80ab",
+      status: CartStatus.OPEN,
+      items: [
+        {
+          product_id: "7567ec4b-b10c-48c5-9345-fc73c48a80aa",
+          count: 2,
+        },
+        {
+          product_id: "7567ec4b-b10c-45c5-9345-fc73c48a80a1",
+          count: 5,
+        },
+      ],
     },
-    count: 2,
   },
-  {
-    product: {
-      description: "Short Product Description7",
-      id: "7567ec4b-b10c-45c5-9345-fc73c48a80a1",
-      price: 15,
-      title: "ProductName",
-      image: "https://example.com/product2.jpg",
-    },
-    count: 5,
-  },
-];
+};
 
 export const orders: Order[] = [
   {
     id: "1",
-    address: {
+    delivery: {
       address: "some address",
       firstName: "Name",
       lastName: "Surname",
       comment: "",
     },
     items: [
-      { productId: "7567ec4b-b10c-48c5-9345-fc73c48a80aa", count: 2 },
-      { productId: "7567ec4b-b10c-45c5-9345-fc73c48a80a1", count: 5 },
+      {
+        product_id: "7567ec4b-b10c-48c5-9345-fc73c48a80aa",
+        count: 2,
+      },
+      {
+        product_id: "7567ec4b-b10c-45c5-9345-fc73c48a80a1",
+        count: 5,
+      },
     ],
     statusHistory: [
       { status: OrderStatus.Open, timestamp: Date.now(), comment: "New order" },
@@ -94,13 +97,13 @@ export const orders: Order[] = [
   },
   {
     id: "2",
-    address: {
+    delivery: {
       address: "another address",
       firstName: "John",
       lastName: "Doe",
       comment: "Ship fast!",
     },
-    items: [{ productId: "7567ec4b-b10c-48c5-9345-fc73c48a80aa", count: 3 }],
+    items: [{ product_id: "7567ec4b-b10c-48c5-9345-fc73c48a80aa", count: 3 }],
     statusHistory: [
       {
         status: OrderStatus.Sent,
