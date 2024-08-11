@@ -35,15 +35,11 @@ export function useUpdateOrderStatus() {
 
 export function useSubmitOrder() {
   return useMutation((order: OrderDto) => {
-    return axios.post<Order>(
-      `${API_PATHS.order}/profile/cart/checkout`,
-      order,
-      {
-        headers: {
-          Authorization: `Basic ${localStorage.getItem("authorization_token")}`,
-        },
-      }
-    );
+    return axios.post<Order>(`${API_PATHS.order}/cart/checkout`, order, {
+      headers: {
+        Authorization: `Basic ${localStorage.getItem("authorization_token")}`,
+      },
+    });
   });
 }
 
